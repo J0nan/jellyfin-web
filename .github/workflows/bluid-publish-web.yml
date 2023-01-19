@@ -35,9 +35,11 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-          
+
     - name: Checkout modified web interface
       uses: actions/checkout@v3
+      with:
+        path: web
 
     - name: Store commit of web interface
       id: web-commit

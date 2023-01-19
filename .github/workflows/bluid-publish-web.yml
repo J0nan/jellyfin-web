@@ -37,7 +37,7 @@ jobs:
           ${{ runner.os }}-node-
 
     - name: Checkout modified web interface
-      uses: actions/checkout@v3
+      uses: actions/checkout@v1
       with:
         path: web
 
@@ -54,11 +54,12 @@ jobs:
 
         cd ..
         tag=$(git describe --tags --abbrev=0)
-        release_name="jellyfin-web-10.8.8-$tag-${{ matrix.target }}"
+        release_name="jellyfin-web-10.8.8-$tag-${{ steps.web-commit.outputs.commit }}"
         tar czf "${release_name}".tar.gz ./web/dist
+
     - name: Publish web interface
       uses: softprops/action-gh-release@v1
       with:
-        files: jellyfin-web-*.tar.gz
+        files: "jellyfin-web-10.8.8-*"
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

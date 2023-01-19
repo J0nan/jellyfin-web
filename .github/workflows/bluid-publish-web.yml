@@ -55,7 +55,6 @@ jobs:
     - name: Upload web interface
       uses: softprops/action-gh-release@v1
       with:
-        name: jellyfin-web-10.8.0+${{ steps.web-commit.outputs.commit }}.tar.gz
-        if-no-files-found: error
+        name: jellyfin-web-10.8.8+${{ steps.web-commit.outputs.commit }}.tar.gz
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

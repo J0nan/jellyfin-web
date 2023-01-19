@@ -51,11 +51,13 @@ jobs:
         cd web
         npm install
         cp -r dist ../docker/
-        tar czf dist.tar.gz dist
-    - name: Upload web interface
+
+        tag=$(git describe --tags --abbrev=0)
+        release_name="jellyfin-web-10.8.8-$tag-${{ matrix.target }}"
+        tar czf "${release_name}".tar.gz dist
+    - name: Publish web interface
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: $(git describe --tags --abbrev=0)
-        name: jellyfin-web-10.8.8+${{ steps.web-commit.outputs.commit }}.tar.gz
+        files: jellyfin-web-*.tar.gz
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

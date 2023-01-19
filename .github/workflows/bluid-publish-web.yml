@@ -58,6 +58,6 @@ jobs:
     - name: Publish web interface
       uses: softprops/action-gh-release@v1
       with:
-        files: jellyfin-web-*.tar.gz
+        files: jellyfin-web-10.8.8-*
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
